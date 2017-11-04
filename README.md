@@ -2,24 +2,33 @@
 
 ### This app displays a list of products with their images and descriptions, uploaded using a form.
 
-All pages where a user name is used will first look for first name and last name.  If those don't exist it will default to username.
-
 ##### The Product Display App is built using the following methods:
 
-1. Django template filters
-2. Django Forms and Model Forms
-3. Image Fields and image uploads
-4. User Authentication
-5. Django and AJAX to create a like button
+* Django template filters
+* Django Forms and Model Forms
+* Image Fields and image uploads
+* User Authentication
+* Django and AJAX to create a like button
 
 ##### The Product Display App uses the following packages:
 
-1. dj-database-url
-2. Django
-3. django-widget-tweaks
-4. olefile
-5. Pillow
-6. python-decouple
+* dj-database-url
+* Django
+* django-widget-tweaks
+* olefile
+* Pillow
+* python-decouple
+
+All pages where a user name is used will first look for first name and last name.  If those don't exist it will default to username.
+
+You will need to create a .env file and add your secret key and database settings to it.  Take a look at the env.example file for examples of formatting.  Here's an idea of a basic .evn file:
+
+```
+SECRET_KEY = 'randomsetofnumberslettersandcharactersetc'
+DEBUG=True
+ALLOWED_HOSTS=.localhost,127.0.0.1
+DATABASE_URL=sqlite:///db.sqlite3
+```
 
 To Install first create an virtual environment to work in.
 
