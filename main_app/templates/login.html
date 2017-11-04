@@ -1,0 +1,29 @@
+{% extends 'base-inner.html' %}
+{% load widget_tweaks %}
+
+{% load staticfiles %}
+{% block content %}
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-4">
+
+      <h1>Login</h1>
+      <form method="post" action=".">
+        {% csrf_token %}
+        {% include 'includes/form.html' with form=form %}
+        <input class="btn btn-product" type="submit" value="Submit" />
+      </form>
+
+      </div>
+
+      <div class="col-1"></div>
+      <div class="col-7">
+        <h1>Right Side</h1>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base-inner.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<section>
+<div class="container">
+  <div class="row text-center">
+    <div class="col">
+
+      <h1 style="text-transform:uppercase">Access Denied</h1>
+        {% if user.is_authenticated %}
+          <h2>Click <a href="/user/{{user.username}}/">here</a> to view your profile.</h2>
+          <a class="btn btn-product mt-3" href="/user/{{user.username}}/">Profile Page</a>
+        {% else %}
+          <h2>Click <a href="{% url 'Login' %}">here</a> to login and view your profile.</h2>
+          <a class="btn btn-product mt-3" href="{% url 'Login' %}">Login Page</a>
+        {% endif %}
+
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

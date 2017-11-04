@@ -1,0 +1,83 @@
+{% extends 'base-inner.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<section>
+<div class="container">
+
+  <div class="product card card-default product-detail">
+
+    <div class="card-header">
+          <h3 class="card-title"><a href="{{ product.url }}" target="_blank">{{ product.name }}</a></h3>
+          by:<a href="/user/{{product.user.username}}/"> {% if product.user.first_name %} {{product.user.first_name}} {{product.user.last_name}}{% else %}{{ product.user.username }}{% endif %}</a>
+        </div>
+
+    <div class="card-body">
+      <div class="product-photo-detail text-center">
+        <a href="{{ product.url }}" target="_blank">
+          {% if product.image %}
+              <img class="img-fluid" src="{{ product.image.url }}" height="200" />
+          {% else %}
+              <img class="img-fluid" src="{{ product.image_url }}" height="200" />
+          {% endif %}
+        </a>
+
+        {% if request.user == product.user %}
+      <div class="edit-btn">
+        <a href="{{ request.path }}edit" class="btn btn-product mt-3">Edit Product</a>
+        <a href="{{ request.path }}delete" class="btn btn-product mt-3">Delete Product</a>
+      </div>
+      {% endif %}
+
+    </div>
+
+
+      <table class="product-table mt-4">
+        <tr>
+          <th>
+            <i class="fa fa-external-link fa-lg"></i>
+            Product Link:
+          </th>
+          <td><a href="{{ product.url }}" target="_blank">{{ product.name }}</a></td>
+
+        </tr>
+        <tr>
+          <th>
+            <i class="fa fa-file-text-o fa-lg"></i>
+            Description:
+          </th>
+          <td><p class="font-16">{{ product.description }}</p></td>
+
+        </tr>
+
+        <tr>
+          <th>
+            <i class="fa fa-product-hunt fa-lg"></i>
+            Product Type:
+          </th>
+          <td>{{ product.product_type }}</td>
+        </tr>
+
+        <tr>
+          <th>
+            <i class="fa fa-money fa-lg"></i>
+            Price:
+          </th>
+          <td>${{ product.price }}</td>
+        </tr>
+
+      </table>
+
+      <button id="likes" data-id="{{product.id}}" class="btn btn-mini btn-danger pull-right mr-5" type="button">
+            {% if product.likes > 0 %} Likes: {{ product.likes }} {% else %} Likes: 0 {% endif %}
+      </button><br />
+      <a href="{{ product.url }}" class="btn btn-product mt-3">Purchase</a>
+
+
+    </div>
+
+  </div>
+
+</div>
+</section>
+{% endblock %}
