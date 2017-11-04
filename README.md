@@ -2,6 +2,8 @@
 
 ### This app displays a list of products with their images and descriptions, uploaded using a form.
 
+All pages where a user name is used will first look for first name and last name.  If those don't exist it will default to username.
+
 ##### The Product Display App is built using the following methods:
 
 1. Django template filters
@@ -33,6 +35,12 @@ Install all dependencies
 
 ```django
 pip install -r requirements.txt
+```
+
+Create a superuser
+
+```django
+python manage.py createsuperuser
 ```
 
 To Do:
