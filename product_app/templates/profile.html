@@ -1,0 +1,51 @@
+{% extends 'base-inner.html' %}
+{% load staticfiles %}
+
+{% block content %} 
+<section>
+<div class="container">
+
+  <h1>Welcome
+    {% if user.is_authenticated %}
+      {% if user.first_name and user.last_name %} {{user.first_name}} {{user.last_name}} {% else %} {{ user.username }} {% endif %}<br />
+      <a href="{% url 'edit_profile' %}" class="btn btn-product">Edit Profile</a>
+    {% else %}
+      Guest
+    {% endif %}</h1><br>
+
+	<div class="row text-center mb-3">
+	{% for product in products %}
+  <div class="col-3 product-panel">
+      <div class="hovereffect">
+          <div style="text-align:center;line-height:150%">
+              <a href="/{{product.id}}/">
+                {% if product.image %}
+                    <img class="img-fluid" src="{{ product.image.url }}" height="200" />
+                {% else %}
+                    <img class="img-fluid" src="{{ product.image_url }}" height="200" />
+                {% endif %}
+              </a>
+              <div class="overlay">
+                  <h2>{{ product.name }}</h2>
+                  <a class="btn btn-outline-white" href="/{{product.id}}/">PRODUCT DETAILS</a>
+              </div>
+              <h6>{{ product.name }}</h6>
+             by
+              <a href="/user/{{product.user.username}}/"> {% if product.user.first_name and product.user.last_name %} {{product.user.first_name}} {{product.user.last_name}} {% else %} {{ product.user.username }} {% endif %}</a>
+          </div>
+      </div>
+      <button id ="likes" data-id="{{product.id}}" class="btn btn-mini btn-danger" type="button">
+        {% if product.likes > 0 %} Likes: {{ product.likes }} {% else %} Likes: 0 {% endif %}
+      </button>
+  </div>
+
+	  <!-- if last column in row -->
+      {% if forloop.counter|divisibleby:"4" and not forloop.last %}
+    </div><br><div class="row text-center mb-3">
+      {% endif %}
+	{% endfor %}
+	</div><br>
+
+</div>
+</section>
+{% endblock %}

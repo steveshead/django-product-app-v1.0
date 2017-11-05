@@ -2,6 +2,11 @@
 
 ### This app displays a list of products with their images and descriptions, uploaded using a form.
 
+* Only registered users can upload products.
+* Registered users will have the option to edit or delete products through the product detail page.
+* When creating a product you have the option to upload an image, add an image url or leave both blank.
+* Visitors can click on the product owners name to see all products by that owner.
+
 ##### The Product Display App is built using the following methods:
 
 * Django template filters

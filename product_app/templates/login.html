@@ -1,0 +1,29 @@
+{% extends 'base-inner.html' %}
+{% load widget_tweaks %}
+
+{% load staticfiles %}
+{% block content %}
+
+<section>
+  <div class="container">
+    <div class="row justify-content-md-center">
+
+      <div class="col-12 text-center">
+      <h1 class="display-4">Login Form</h1>
+			<p class="lead">Please login to your account.</p>
+			<hr class="hr">
+    </div>
+
+      <div class="col-4">
+
+      <form method="post" action=".">
+        {% csrf_token %}
+        {% include 'includes/form.html' with form=form %}
+        <input class="btn btn-product" type="submit" value="Submit" />
+      </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
