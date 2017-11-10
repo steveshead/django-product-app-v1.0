@@ -4,7 +4,11 @@ from django.core.urlresolvers import reverse
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    biography = models.TextField(max_length=500, blank=True,default='Details')
+    biography = models.TextField(max_length=500, blank=True, default='Tell us about you...')
+    tagline = models.CharField(max_length=200, blank=True, default=' ')
+
+    def __str__(self):
+        return ' '
 
 
 def get_image_path(instance, filename):

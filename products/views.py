@@ -106,7 +106,8 @@ def edit_profile(request):
     form = EditProfileForm(initial={
         'first_name': user.first_name,
         'last_name': user.last_name,
-        'biography': userprofile.biography
+        'biography': userprofile.biography,
+        'tagline': userprofile.tagline
     })
 
     if request.method == 'POST':
@@ -115,6 +116,7 @@ def edit_profile(request):
             user.first_name = form.cleaned_data['first_name']  # use cleaned_data
             user.last_name = form.cleaned_data['last_name']
             userprofile.biography = form.cleaned_data['biography']
+            userprofile.tagline = form.cleaned_data['tagline']
             userprofile.save()  # save Biography object
             user.save()  # save User object
             return render(request, 'profile.html', {'user':user,'products': products})  #  always redirect after successful POST.

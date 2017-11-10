@@ -24,12 +24,13 @@ class ProductForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='User Name', max_length=64)
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(required=False, widget=forms.PasswordInput())
 
 class EditProfileForm(forms.Form):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
     biography = forms.CharField(label='Biography', widget=Textarea(attrs={'rows': 5}))
+    tagline = forms.CharField(label='Tagline')
 
 
 class SubscribeForm(forms.Form):

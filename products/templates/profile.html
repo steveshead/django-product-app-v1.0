@@ -6,10 +6,12 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-12">
-    <h1 class="mb-5 display-4 text-center">Welcome
+    <div class="col-12 text-center">
+    <h1 class="display-4">Welcome
       {% if user.is_authenticated %}
         {% if user.first_name and user.last_name %} {{user.first_name}} {{user.last_name}} {% else %} {{ user.username }} {% endif %}</h1>
+        <h4>{% if user.userprofile.tagline %} {{ user.userprofile.tagline }} {% else %} Products designed & created just for you. {% endif %}</h4>
+        <hr class="hr">
     </div>
     <div class="col-4">
         <p><span>Name</span>:<br> {{ user.first_name }} {{ user.last_name}}</p>
@@ -18,9 +20,12 @@
     </div>
     <div class="col-8">
         <p><span>Biography</span>:<br> {{ user.userprofile.biography }}</p>
+        {% if user.userprofile.tagline %}
+        <p><span>Tagline</span>:<br> {{ user.userprofile.tagline }}</p>
+        {% else %}
+        <p><span>Tagline</span>:<br> <a href="{% url 'edit_profile' %}">Edit</a> your profile to add your tagline.</p>
+        {% endif %}
     </div>
-
-
       {% endif %}
   </div>
 

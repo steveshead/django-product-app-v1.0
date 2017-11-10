@@ -49,10 +49,11 @@
 		</div><br>
 	</section>
 
+
+	{% if user.is_authenticated %}
+	<!-- Adding form for adding new products-->
 		<section class="product-form">
 			<div class="container">
-		{% if user.is_authenticated %}
-		<!-- Adding form for adding new products-->
 		<div class="row">
 			<div class="col-12 mb-5">
 				<h1 class="text-center">Product Upload Form</h1>
@@ -79,17 +80,17 @@
 			<ol>
 				<li>Images are not required to upload a product.</li>
 				<li>If no image is uploaded a placeholder will be used instead.</li>
-				<li>You can either upload an image, or input a URL to an image.</li>
+				<li>You can either an image or input a URL to add an image.</li>
 				<li>Uploaded images have priority over URL's.</li>
 			</ol>
 		</div>
 
 	</div>
 
-		{% endif %}
-
 			</div>
 		</div>
 	</div>
 </section>
+{% endif %}
+
 {% endblock %}
