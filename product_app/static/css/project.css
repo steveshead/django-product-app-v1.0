@@ -253,8 +253,6 @@ h6.card-title {
   font-weight: 300;
 }
 
-
-
 .product:last-child {
   margin-bottom: 0;
 }
@@ -319,6 +317,14 @@ h6.card-title {
   width: 100%;
 }
 
+.product-form {
+  background: rgba(0,0,0,0.05);
+}
+
+.product-form .card {
+  background: rgba(0,0,0,0.005);
+}
+
 .fieldWrapper{
  font-size: 10px;
  color: #263d2c;
@@ -332,6 +338,12 @@ h6.card-title {
   font-weight: lighter;
   font-size: 14px;
   letter-spacing: 1px;
+}
+
+/* ----- Profile  ----- */
+.profile p span {
+  text-transform: uppercase;
+  font-weight: 300;
 }
 
 /* ----- Footer  ----- */

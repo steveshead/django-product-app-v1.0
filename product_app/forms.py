@@ -1,5 +1,6 @@
 from django import forms
 from .models import Product
+from .models import Biography
 from django.contrib.admin import widgets
 from django.forms import Textarea
 
@@ -28,9 +29,7 @@ class LoginForm(forms.Form):
 class EditProfileForm(forms.Form):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
-
-    class Meta:
-        fields = ['first_name', 'last_name']
+    biography = forms.CharField(label='Biography', widget=Textarea(attrs={'rows': 5}))
 
 
 class SubscribeForm(forms.Form):

@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
 from .models import Product #, HashTag
+from .models import Biography
 from .forms import ProductForm, LoginForm, ContactForm, SubscribeForm, EditProfileForm
 from django.views import generic
 
@@ -97,18 +98,29 @@ def profile(request, username):
     else:
         return render(request, 'profile.html', {'user':user,'products': products})
 
+
 def edit_profile(request):
     user = request.user
     products = Product.objects.filter(user=user)
-    form = EditProfileForm(request.POST or None, initial={'first_name':user.first_name, 'last_name':user.last_name})
+    biography, created = Biography.objects.get_or_create(user=user)
+    form = EditProfileForm(initial={
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'biography': biography.biography
+    })
+
     if request.method == 'POST':
+        form = EditProfileForm(data=request.POST)
         if form.is_valid():
-            user.first_name = request.POST['first_name']
-            user.last_name = request.POST['last_name']
-            user.save()
-            return render(request, 'profile.html', {'user':user,'products': products})
-    context = {"form": form}
-    return render(request, "edit_profile.html", context)
+            user.first_name = form.cleaned_data['first_name']  # use cleaned_data
+            user.last_name = form.cleaned_data['last_name']
+            biography.biography = form.cleaned_data['biography']
+            biography.save()  # save Biography object
+            user.save()  # save User object
+            return render(request, 'profile.html', {'user':user,'products': products})  #  always redirect after successful POST.
+
+    context = {'form': form}
+    return render(request, 'edit_profile.html', context)
 
 
 def like_product(request):
