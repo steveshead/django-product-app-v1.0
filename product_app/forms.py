@@ -1,6 +1,6 @@
 from django import forms
 from .models import Product
-from .models import Biography
+from .models import UserProfile
 from django.contrib.admin import widgets
 from django.forms import Textarea
 

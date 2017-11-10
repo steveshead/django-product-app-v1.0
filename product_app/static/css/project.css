@@ -343,7 +343,8 @@ h6.card-title {
 /* ----- Profile  ----- */
 .profile p span {
   text-transform: uppercase;
-  font-weight: 300;
+  font-weight: 500;
+  color: #333;
 }
 
 /* ----- Footer  ----- */

@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 
 from .models import Product #, HashTag
-from .models import Biography
+from .models import UserProfile
 from .forms import ProductForm, LoginForm, ContactForm, SubscribeForm, EditProfileForm
 from django.views import generic
 
@@ -102,11 +102,11 @@ def profile(request, username):
 def edit_profile(request):
     user = request.user
     products = Product.objects.filter(user=user)
-    biography, created = Biography.objects.get_or_create(user=user)
+    userprofile, created = UserProfile.objects.get_or_create(user=user)
     form = EditProfileForm(initial={
         'first_name': user.first_name,
         'last_name': user.last_name,
-        'biography': biography.biography
+        'biography': userprofile.biography
     })
 
     if request.method == 'POST':
@@ -114,8 +114,8 @@ def edit_profile(request):
         if form.is_valid():
             user.first_name = form.cleaned_data['first_name']  # use cleaned_data
             user.last_name = form.cleaned_data['last_name']
-            biography.biography = form.cleaned_data['biography']
-            biography.save()  # save Biography object
+            userprofile.biography = form.cleaned_data['biography']
+            userprofile.save()  # save Biography object
             user.save()  # save User object
             return render(request, 'profile.html', {'user':user,'products': products})  #  always redirect after successful POST.
 
