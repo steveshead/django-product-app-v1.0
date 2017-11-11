@@ -35,20 +35,33 @@ ALLOWED_HOSTS=.localhost,127.0.0.1
 DATABASE_URL=sqlite:///db.sqlite3
 ```
 
-To Install first create an virtual environment to work in.
+To Install first create an virtual environment in the root directory.
 
 ```django
 python3 -m venv myvenv
 ```
 Activate the virtual environment
+
 ```django
 source myvenv/bin/activate
+```
+
+Change directory to the project folder
+
+```django
+cd myproject
 ```
 
 Install all dependencies
 
 ```django
 pip install -r requirements.txt
+```
+
+Migrate schema
+
+```django
+python manage.py migrate
 ```
 
 Create a superuser
