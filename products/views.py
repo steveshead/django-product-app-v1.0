@@ -25,6 +25,7 @@ from . import forms
 from django.shortcuts import render
 
 from django.views.generic.list import ListView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class HomePage(generic.TemplateView):
@@ -37,6 +38,8 @@ class HomePage(generic.TemplateView):
 
 
 def products(request):
+    product_list = Product.objects.all()
+    page = request.GET.get('page', 1)
     username = request.GET.get('username',None)
     user = None
     if username:
@@ -49,6 +52,15 @@ def products(request):
     else:
         products = Product.objects.all()
     form = ProductForm()
+
+    paginator = Paginator(products, 8)
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
     return render(request, 'products.html', {'products': products, 'form':form})
 
 
