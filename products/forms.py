@@ -15,7 +15,7 @@ class ProductForm(forms.ModelForm):
             'description': 'Product Description',
             'image': 'Product Image',
             'image_url': 'Product Image URL',
-            'price': 'Product Price'
+            'price': 'Product Price',
         }
         widgets = {
             'description': Textarea(attrs={'rows': 5}),

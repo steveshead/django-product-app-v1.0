@@ -26,6 +26,8 @@
 
 All pages where a user name is used will first look for first name and last name.  If those don't exist it will default to username.
 
+In the profile page, a users tagline will appear under the page heading.
+
 You will need to create a .env file and add your secret key and database settings to it.  Take a look at the env.example file for examples of formatting.  Here's an idea of a basic .evn file:
 
 ```
@@ -71,5 +73,7 @@ python manage.py createsuperuser
 ```
 
 To Do:
-* Create a dropdown menu to select user to view
+* Create a base version so it can be themed
+* Rebuild profiles for public and private viewing
+* Rebuild success page after form fill
 * Rebuild user account functionality with more robust code

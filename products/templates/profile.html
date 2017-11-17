@@ -6,19 +6,19 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-12 text-center">
+    <div class="col-md-12 text-center">
     <h1 class="display-4">Welcome
       {% if user.is_authenticated %}
         {% if user.first_name and user.last_name %} {{user.first_name}} {{user.last_name}} {% else %} {{ user.username }} {% endif %}</h1>
         <h4>{% if user.userprofile.tagline %} {{ user.userprofile.tagline }} {% else %} Products designed & created just for you. {% endif %}</h4>
-        <hr class="hr">
+         <hr class="hr">
     </div>
-    <div class="col-4">
+    <div class="col-md-4">
         <p><span>Name</span>:<br> {{ user.first_name }} {{ user.last_name}}</p>
         <p><span>Username</span>:<br> {{ user.username}}</p>
         <a href="{% url 'edit_profile' %}" class="btn btn-product mt-3 mb-5">Edit Profile</a>
     </div>
-    <div class="col-8">
+    <div class="col-md-8">
         <p><span>Biography</span>:<br> {{ user.userprofile.biography }}</p>
         {% if user.userprofile.tagline %}
         <p><span>Tagline</span>:<br> {{ user.userprofile.tagline }}</p>
@@ -31,15 +31,17 @@
 
 	<div class="row text-center mb-3">
 	{% for product in products %}
-  <div class="col-3 product-panel">
+  <div class="col-md-3 product-panel">
       <div class="hovereffect">
           <div style="text-align:center;line-height:150%">
               <a href="/{{product.id}}/">
                 {% if product.image %}
-                    <img class="img-fluid" src="{{ product.image.url }}" height="200" />
-                {% else %}
-                    <img class="img-fluid" src="{{ product.image_url }}" height="200" />
-                {% endif %}
+								    <img class="img-fluid" src="{{ product.image.url }}" />
+								{% elif product.image_url %}
+								    <img class="img-fluid" src="{{ product.image_url }}" />
+								{% else %}
+									<img class="img-fluid" src="{% static 'images/default.jpg' %}" />
+								{% endif %}
               </a>
               <div class="overlay">
                   <h2>{{ product.name }}</h2>

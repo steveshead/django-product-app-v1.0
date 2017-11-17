@@ -1,83 +1,84 @@
-{% extends 'base-inner.html' %}
-{% load staticfiles %}
-
-{% block content %}
+{% extends 'base-inner.html' %} {% load staticfiles %} {% block content %}
 <section>
-<div class="container">
+  <div class="container">
+    <div class="row">
 
-  <div class="product card card-default product-detail">
+      <div class="product card card-default product-detail">
+        <div class="card-header">
+          <h3 class="card-title"><a href="{{ product.url }}" target="_blank">{{ product.name }}</a></h3> by:
+          <a href="/product/?username={{product.user.username}}"> {% if product.user.first_name %} {{product.user.first_name}} {{product.user.last_name}}{% else %}{{ product.user.username }}{% endif %}</a>
+        </div>
+      </div>
 
-    <div class="card-header">
-          <h3 class="card-title"><a href="{{ product.url }}" target="_blank">{{ product.name }}</a></h3>
-          by:<a href="/product/?username={{product.user.username}}"> {% if product.user.first_name %} {{product.user.first_name}} {{product.user.last_name}}{% else %}{{ product.user.username }}{% endif %}</a>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 mt-2">
+
+        <div class="product-photo-detail text-center">
+          <a href="{{ product.url }}" target="_blank">
+          {% if product.image %}
+              <img class="img-fluid" src="{{ product.image.url }}" />
+          {% elif product.image_url %}
+              <img class="img-fluid" src="{{ product.image_url }}" />
+          {% else %}
+            <img class="img-fluid" src="{% static 'images/default.jpg' %}" />
+          {% endif %}
+        </a> {% if request.user == product.user %}
+          <div class="edit-btn">
+            <a href="{{ request.path }}edit" class="btn btn-info mt-3">Edit Product</a>
+            <a href="{{ request.path }}delete" class="btn btn-info mt-3">Delete Product</a>
+          </div>
+          {% endif %}
         </div>
 
-    <div class="card-body">
-      <div class="product-photo-detail text-center">
-        <a href="{{ product.url }}" target="_blank">
-          {% if product.image %}
-              <img class="img-fluid" src="{{ product.image.url }}" height="200" />
-          {% else %}
-              <img class="img-fluid" src="{{ product.image_url }}" height="200" />
-          {% endif %}
-        </a>
-
-        {% if request.user == product.user %}
-      <div class="edit-btn">
-        <a href="{{ request.path }}edit" class="btn btn-product mt-3">Edit Product</a>
-        <a href="{{ request.path }}delete" class="btn btn-product mt-3">Delete Product</a>
-      </div>
-      {% endif %}
-
     </div>
 
+    <div class="col-md-7 product-table mt-4">
 
-      <table class="product-table mt-4">
-        <tr>
-          <th>
-            <i class="fa fa-external-link fa-lg"></i>
-            Product Link:
-          </th>
-          <td><a href="{{ product.url }}" target="_blank">{{ product.name }}</a></td>
+      <div class="row">
+        <div class="col-md-5 left">
+          <i class="fa fa-external-link fa-lg"></i> Product Link:
+        </div>
+        <div class="col-md-7 right">
+          <a href="{{ product.url }}" target="_blank">{{ product.name }}</a>
+        </div>
 
-        </tr>
-        <tr>
-          <th>
-            <i class="fa fa-file-text-o fa-lg"></i>
-            Description:
-          </th>
-          <td><p class="font-18">{{ product.description }}</p></td>
+        <div class="col-md-5 left">
+          <i class="fa fa-file-text-o fa-lg"></i> Description:
+        </div>
+        <div class="col-md-7 right">
+          <p class="font-18">{{ product.description }}</p>
+        </div>
 
-        </tr>
+        <div class="col-md-5 left">
+          <i class="fa fa-product-hunt fa-lg"></i> Product Type:
+        </div>
+        <div class="col-md-7 right">
+          {{ product.product_type }}
+        </div>
 
-        <tr>
-          <th>
-            <i class="fa fa-product-hunt fa-lg"></i>
-            Product Type:
-          </th>
-          <td>{{ product.product_type }}</td>
-        </tr>
+        <div class="col-md-5 left">
+          <i class="fa fa-money fa-lg"></i> Price:
+        </div>
+        <div class="col-md-7 right">
+          ${{ product.price }}
+        </div>
 
-        <tr>
-          <th>
-            <i class="fa fa-money fa-lg"></i>
-            Price:
-          </th>
-          <td>${{ product.price }}</td>
-        </tr>
-
-      </table>
-
-      <button id="likes" data-id="{{product.id}}" class="btn btn-mini btn-danger pull-right mr-5" type="button">
+        <div class="col-md-5 left">
+          <a href="{{ product.url }}" class="btn btn-info mt-3">Purchase</a>
+        </div>
+        <div class="col-md-7 right">
+          <button id="likes" data-id="{{product.id}}" class="btn btn-mini btn-danger" type="button">
             {% if product.likes > 0 %} Likes: {{ product.likes }} {% else %} Likes: 0 {% endif %}
-      </button><br />
-      <a href="{{ product.url }}" class="btn btn-product mt-3">Purchase</a>
-
+          </button>
+        </div>
+      </div>
 
     </div>
-
   </div>
 
-</div>
+
+  </div>
 </section>
 {% endblock %}

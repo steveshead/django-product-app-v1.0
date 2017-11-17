@@ -8,7 +8,7 @@
 		<div class="section-heading text-center">
 			<h1 class="display-4">Product Designs</h1>
 			<p class="lead">Products designed & created just for you.</p>
-			<hr class="hr">
+			 <hr class="hr">
 			<p class=mb-0>All of these designs are available in different products, colors and sizes, for men, women and kids alike.</p>
 			<p class=mb-0>You can even customize them, adding text and images if you would like - no really, you can!</p>
 			<p>Seriously, there's no end to the fun - go take a look.</p>
@@ -18,14 +18,16 @@
 		<!-- Looping over each product in the products list -->
 		{% for product in products %}
 				<!-- Creating a column for each product card -->
-			<div class="col-3 product-panel">
+			<div class="col-md-3 product-panel">
 			    <div class="hovereffect">
 			        <div style="text-align:center;line-height:150%">
 
 								{% if product.image %}
 								    <img class="img-fluid" src="{{ product.image.url }}" />
-								{% else %}
+								{% elif product.image_url %}
 								    <img class="img-fluid" src="{{ product.image_url }}" />
+								{% else %}
+									<img class="img-fluid" src="{% static 'images/default.jpg' %}" />
 								{% endif %}
 
 		            <div class="overlay">
@@ -79,10 +81,11 @@
 		<section class="product-form">
 			<div class="container">
 		<div class="row">
-			<div class="col-12 mb-5">
+			<div class="col-md-12 mb-5">
 				<h1 class="text-center">Product Upload Form</h1>
+
 			</div>
-		<div class="col-5">
+		<div class="col-md-5">
 			<div class="product card card-default">
 			  <div class="card-header">
 			    <h3 class="card-title mb-4">Add Product</h3>
@@ -97,15 +100,20 @@
 			</div>
 		</div>
 
-		<div class="col-1"></div>
+		<div class="col-md-1"></div>
 
-		<div class="col-6">
+		<div class="col-md-6">
 			<h2 class="mb-4">Guidelines</h2>
+			<p>Fill in the fields to upload your product details. All fields are required unless stated otherwise below.  All products are publically viewable, but can only be edited by the user that uploaded them, or a site admin in the admin panel.</p>
 			<ol>
 				<li>Images are not required to upload a product.</li>
-				<li>If no image is uploaded a placeholder will be used instead.</li>
-				<li>You can either an image or input a URL to add an image.</li>
+				<li>You can either upload an image or input a URL to add an image.</li>
+				<li>If no image is uploaded or linked, a default will be used instead.</li>
 				<li>Uploaded images have priority over URL's.</li>
+				<li>The product URL is used to link the "Purchase" button.</li>
+				<li>Visitors can view all products, but not user profiles.</li>
+				<li>Visitors can view products by user, but not user profiles.</li>
+				<li>Only the product owner can edit the product.</li>
 			</ol>
 		</div>
 

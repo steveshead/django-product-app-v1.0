@@ -22,7 +22,6 @@ from django.template import Context
 from django.template.loader import get_template
 from django.contrib.auth import get_user_model
 from . import forms
-from django.shortcuts import render
 
 from django.views.generic.list import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -38,7 +37,7 @@ class HomePage(generic.TemplateView):
 
 
 def products(request):
-    product_list = Product.objects.all()
+    product_list = Product.objects.get_queryset().order_by('id')
     page = request.GET.get('page', 1)
     username = request.GET.get('username',None)
     user = None
@@ -50,10 +49,10 @@ def products(request):
     if user:
         return Product.objects.filter(user=user)
     else:
-        products = Product.objects.all()
+        products = Product.objects.get_queryset().order_by('id')
     form = ProductForm()
 
-    paginator = Paginator(products, 8)
+    paginator = Paginator(products, 16)
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
@@ -189,10 +188,8 @@ class PostUpdateView(UpdateView):
 
    def form_valid(self, form):
       self.object = form.save(commit=False)
-      # Any manual settings go here
       self.object.save()
-      # return HttpResponseRedirect(self.object.get_absolute_url())
-      return redirect ('products')
+      return redirect('detail', self.object.pk)
 
    @method_decorator(login_required)
    def dispatch(self, request, *args, **kwargs):

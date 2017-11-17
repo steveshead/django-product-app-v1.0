@@ -22,7 +22,7 @@
 						{% endif %}
 				{%endif%}
 			{% endfor %}
-			<hr class="hr">
+
 			<p class=mb-0>All of these designs are available in different products, colors and sizes, for men, women and kids alike.</p>
 			<p class=mb-0>You can even customize them, adding text and images if you would like - no really, you can!</p>
 			<p>Seriously, there's no end to the fun - go take a look.</p>
@@ -32,14 +32,16 @@
 		<!-- Looping over each product in the products list -->
 		{% for product in product_list %}
 				<!-- Creating a column for each product card -->
-			<div class="col-3 product-panel">
+			<div class="col-md-3 product-panel">
 			    <div class="hovereffect">
 			        <div style="text-align:center;line-height:150%">
 
 								{% if product.image %}
 								    <img class="img-fluid" src="{{ product.image.url }}" />
-								{% else %}
+								{% elif product.image_url %}
 								    <img class="img-fluid" src="{{ product.image_url }}" />
+								{% else %}
+									<img class="img-fluid" src="{% static 'images/default.jpg' %}" />
 								{% endif %}
 
 		            <div class="overlay">
