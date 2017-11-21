@@ -13,20 +13,33 @@
         <h4>{% if user.userprofile.tagline %} {{ user.userprofile.tagline }} {% else %} Products designed & created just for you. {% endif %}</h4>
          <hr class="hr">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3 text-center">
+      {% if user.userprofile.image %}
+        <img class="img-fluid text-center mb-0" src="/product/{{ user.userprofile.image }}">
+      {% else %}
+        <img class="img-fluid text-center mb-0" src="/product/profile_image/avatar.jpg">
+      {% endif %}
+        <a href="{% url 'edit_profile' %}" class="btn btn-product mb-5 mt-3"><i class="fa fa-edit">&nbsp;</i>Edit Profile</a>
+    </div>
+    <div class="col-md-2">
         <p><span>Name</span>:<br> {{ user.first_name }} {{ user.last_name}}</p>
         <p><span>Username</span>:<br> {{ user.username}}</p>
-        <a href="{% url 'edit_profile' %}" class="btn btn-product mt-3 mb-5">Edit Profile</a>
+        <p><span>Date Joined</span>:<br> {{ user.date_joined|date:"m-d-Y" }}</p>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-7">
         <p><span>Biography</span>:<br> {{ user.userprofile.biography }}</p>
-        {% if user.userprofile.tagline %}
+          {% if user.userprofile.tagline %}
         <p><span>Tagline</span>:<br> {{ user.userprofile.tagline }}</p>
-        {% else %}
+          {% else %}
         <p><span>Tagline</span>:<br> <a href="{% url 'edit_profile' %}">Edit</a> your profile to add your tagline.</p>
-        {% endif %}
+          {% endif %}
     </div>
       {% endif %}
+  </div>
+
+  <div class="col-md-12 text-center">
+    <h1>Your Product Designs</h1>
+    <hr class="hr">
   </div>
 
 	<div class="row text-center mb-3">

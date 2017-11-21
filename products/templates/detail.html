@@ -26,8 +26,8 @@
           {% endif %}
         </a> {% if request.user == product.user %}
           <div class="edit-btn">
-            <a href="{{ request.path }}edit" class="btn btn-info mt-3">Edit Product</a>
-            <a href="{{ request.path }}delete" class="btn btn-info mt-3">Delete Product</a>
+            <a href="{{ request.path }}edit" class="btn btn-product mt-3"><i class="fa fa-edit">&nbsp;</i>Edit Product</a>
+            <a href="{{ request.path }}delete" class="btn btn-product mt-3"><i class="fa fa-trash-o">&nbsp;</i>Delete Product</a>
           </div>
           {% endif %}
         </div>
@@ -38,35 +38,35 @@
 
       <div class="row">
         <div class="col-md-5 left">
-          <i class="fa fa-external-link fa-lg"></i> Product Link:
+          <i class="fa fa-external-link"></i> Product Link:
         </div>
         <div class="col-md-7 right">
           <a href="{{ product.url }}" target="_blank">{{ product.name }}</a>
         </div>
 
         <div class="col-md-5 left">
-          <i class="fa fa-file-text-o fa-lg"></i> Description:
+          <i class="fa fa-file-text-o"></i> Description:
         </div>
         <div class="col-md-7 right">
           <p class="font-18">{{ product.description }}</p>
         </div>
 
         <div class="col-md-5 left">
-          <i class="fa fa-product-hunt fa-lg"></i> Product Type:
+          <i class="fa fa-product-hunt"></i> Product Type:
         </div>
         <div class="col-md-7 right">
           {{ product.product_type }}
         </div>
 
         <div class="col-md-5 left">
-          <i class="fa fa-money fa-lg"></i> Price:
+          <i class="fa fa-money"></i> Price:
         </div>
         <div class="col-md-7 right">
           ${{ product.price }}
         </div>
 
         <div class="col-md-5 left">
-          <a href="{{ product.url }}" class="btn btn-info mt-3">Purchase</a>
+          <a href="{{ product.url }}" class="btn btn-product mt-3"><i class="fa fa-shopping-basket">&nbsp;</i>Purchase</a>
         </div>
         <div class="col-md-7 right">
           <button id="likes" data-id="{{product.id}}" class="btn btn-mini btn-danger" type="button">
@@ -77,7 +77,6 @@
 
     </div>
   </div>
-
 
   </div>
 </section>

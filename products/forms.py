@@ -30,7 +30,8 @@ class EditProfileForm(forms.Form):
     first_name = forms.CharField(label='First Name')
     last_name = forms.CharField(label='Last Name')
     biography = forms.CharField(label='Biography', widget=Textarea(attrs={'rows': 5}))
-    tagline = forms.CharField(label='Tagline')
+    tagline = forms.CharField(label='Tagline', required=False)
+    image = forms.ImageField(required=False)
 
 
 class SubscribeForm(forms.Form):

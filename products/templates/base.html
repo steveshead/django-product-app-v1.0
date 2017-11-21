@@ -66,6 +66,9 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{% url 'products' %}">Products</a>
 			</li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'designers' %}">Designers</a>
+      </li>
 			<li class="nav-item">
           <a class="nav-link" {% if request.get_full_path == home_url %}href="#sec1"{% else %}style="display:none;"{% endif %}>Section 1</a>
 			</li>

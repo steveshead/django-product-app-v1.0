@@ -6,6 +6,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     biography = models.TextField(max_length=500, blank=True, default='Tell us about you...')
     tagline = models.CharField(max_length=200, blank=True, default=' ')
+    image = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):
         return ' '

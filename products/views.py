@@ -27,6 +27,16 @@ from django.views.generic.list import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
+class DesignersView(generic.TemplateView):
+    template_name = 'designers.html'
+
+    def get_context_data(self,**kwargs):
+        context = super(DesignersView,self).get_context_data(**kwargs)
+        context['object_list'] = User.objects.all()
+        context['designer_products'] = Product.objects.all().order_by('?')[:4]
+        return context
+
+
 class HomePage(generic.TemplateView):
     template_name = "index.html"
 
@@ -118,16 +128,18 @@ def edit_profile(request):
         'first_name': user.first_name,
         'last_name': user.last_name,
         'biography': userprofile.biography,
-        'tagline': userprofile.tagline
+        'tagline': userprofile.tagline,
+        'image': userprofile.image
     })
 
     if request.method == 'POST':
-        form = EditProfileForm(data=request.POST)
+        form = EditProfileForm(request.POST, request.FILES)
         if form.is_valid():
             user.first_name = form.cleaned_data['first_name']  # use cleaned_data
             user.last_name = form.cleaned_data['last_name']
             userprofile.biography = form.cleaned_data['biography']
             userprofile.tagline = form.cleaned_data['tagline']
+            userprofile.image = form.cleaned_data['image']
             userprofile.save()  # save Biography object
             user.save()  # save User object
             return render(request, 'profile.html', {'user':user,'products': products})  #  always redirect after successful POST.

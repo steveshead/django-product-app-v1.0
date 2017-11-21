@@ -8,6 +8,7 @@ urlpatterns = [
 
     url(r'^$', views.HomePage.as_view(), name='home'),
     url(r'^contact/$', views.contact, name='contact'),
+    url(r'^designers/', views.DesignersView.as_view(), name='designers'),
     url(r'^subscribe/$', views.subscribe, name='subscribe'),
     url(r'^products/$', views.products, name = 'products'),
     url(r'^product/$', ProductListView.as_view(), name='product_list'),
