@@ -80,6 +80,10 @@ small {
   color: rgba(0,0,0,0.2) !important;
 }
 
+.signup-form .form-text {
+  display: none;
+}
+
 .section-heading h1 {
   margin-bottom: 0;
 }
@@ -133,6 +137,10 @@ li.active.page-item.page-link {
   background: #d96051;
   color: #fff;
   border: 1px solid #d96051;
+}
+
+.navbar-right .btn-product:hover {
+  color: #fff !important;
 }
 
 /* custom button */

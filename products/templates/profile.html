@@ -37,10 +37,15 @@
       {% endif %}
   </div>
 
+
+{% if products %}
   <div class="col-md-12 text-center">
     <h1>Your Product Designs</h1>
     <hr class="hr">
   </div>
+  {% else %}
+  <div class="display-none"></div>
+  {% endif %}
 
 	<div class="row text-center mb-3">
 	{% for product in products %}

@@ -4,6 +4,9 @@ from .models import UserProfile
 from django.contrib.admin import widgets
 from django.forms import Textarea
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -20,11 +23,6 @@ class ProductForm(forms.ModelForm):
         widgets = {
             'description': Textarea(attrs={'rows': 5}),
         }
-
-
-class LoginForm(forms.Form):
-    username = forms.CharField(label='User Name', max_length=64)
-    password = forms.CharField(required=False, widget=forms.PasswordInput())
 
 class EditProfileForm(forms.Form):
     first_name = forms.CharField(label='First Name')

@@ -14,14 +14,15 @@ DATABASES = {
 # Clear the session if the browser window is closed
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-
+REGISTRATION_ADMINS = [('Steve', 'steve@steve-shead.com')]
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
-
+SITE_ID = 1
+ACCOUNT_ACTIVATION_DAYS = 7
 
 # Application definition
 
@@ -30,6 +31,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     'django.contrib.admin',
+    'django.contrib.sites',
+    'registration',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -68,7 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
-LOGIN_URL = '/login'
+LOGIN_URL = '/accounts/login'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators

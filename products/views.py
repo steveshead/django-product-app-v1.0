@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 
 from .models import Product #, HashTag
 from .models import UserProfile
-from .forms import ProductForm, LoginForm, ContactForm, SubscribeForm, EditProfileForm
+from .forms import ProductForm, ContactForm, SubscribeForm, EditProfileForm
 from django.views import generic
 
 # edit / delete views
@@ -25,6 +25,13 @@ from . import forms
 
 from django.views.generic.list import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.views import LoginView
+
+
+class LoginView(LoginView):
+
+    def get_success_url(self):
+        return reverse('profile', args=[self.request.user.username])
 
 
 class DesignersView(generic.TemplateView):
@@ -160,37 +167,6 @@ def like_product(request):
             product.save()
 
     return HttpResponse(likes)
-
-
-def login_view(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username=form.cleaned_data['username']
-            password=form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-
-            if user is not None:
-                # the password verified for the user
-                if user.is_active:
-                    print("User is valid, active and authenticated")
-                    login(request, user)
-                    products = Product.objects.filter(user=user)
-                    return render(request, 'profile.html', {'user':user,'products': products})
-                else:
-                    print("The password is valid, but the account has been disabled!")
-            else:
-                # the authentication system was unable to verify the username and password
-                print("The username and password were incorrect.")
-
-    else:
-        form = LoginForm()
-    return render(request, 'login.html', {'form': form})
-
-
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect('/')
 
 
 class PostUpdateView(UpdateView):

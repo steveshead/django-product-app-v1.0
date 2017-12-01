@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include(products.urls)),
+    url(r'^accounts/', include('registration.backends.admin_approval.urls')),
 ]
 
 # Change admin site title

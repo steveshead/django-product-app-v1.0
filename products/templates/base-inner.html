@@ -46,7 +46,7 @@
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
 
     {% endblock %}
-
+    <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
 
 <body>
@@ -57,7 +57,7 @@
 	<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="{% url 'home' %}">S2<span>Design</span></a>
+	<a class="navbar-brand" href="{% url 'home' %}">S2<span>DESIGN</span></a>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item">
@@ -88,10 +88,10 @@
 			{% if user.is_authenticated %}
 					<li><a class="navbar-text navbar-right" href="{% url 'profile' user.username %}">
             {% if user.first_name and user.last_name %} {{user.first_name}} {{user.last_name}} {% else %} {{ user.username }} {% endif %} </a></li>
-					<li><a class="navbar-text navbar-right" href="{% url 'Logout' %}">&nbsp;Logout </a></li>
-			{% else %}
-					<li><a class="navbar-text navbar-right" href="{% url 'Login' %}">Login </a></li>
-			{% endif %}
+          <li><a class="navbar-text navbar-right" href="{% url 'auth_logout' %}">&nbsp;Logout </a></li>
+  			{% else %}
+        <li><a class="navbar-text navbar-right btn btn-product" href="/accounts/register">Signup </a></li>
+        <li><a class="navbar-text navbar-right" href="{% url 'auth_login' %}">Login </a></li>			{% endif %}
 		</ul>
 		<!-- /end right nav -->
 	</div>

@@ -19,6 +19,7 @@
 
 * dj-database-url
 * Django
+* django-registration-redux
 * django-widget-tweaks
 * olefile
 * Pillow
@@ -74,6 +75,4 @@ python manage.py createsuperuser
 
 To Do:
 * Create a base version so it can be themed
-* Rebuild profiles for public and private viewing
 * Rebuild success page after form fill
-* Rebuild user account functionality with more robust code
