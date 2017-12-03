@@ -1,24 +1,14 @@
-{% extends "base-inner.html" %}
+{% extends "base.html" %}
 
 
 {% block content %}
+
 <section class="thank_you">
 <div class="container">
   <div class="row">
     <div class="col-md-12 text-center">
-        <h1>THANK YOU!</h1>
-          <h4>We have received your<strong> message.</strong></h4>
-          <i class="fa fa-envelope-o fa-5x mt-3 mb-3"></i>
-          <br />
-          <h4 class="mb-3">We'll get back to you shortly.</h4>
-        <p>
-          <a class="btn btn-product" href="{% url 'home' %}" role="button">Homepage</a>
-          {% if user.is_authenticated %}
-          <a class="btn btn-product" href="{% url 'profile' user.username %}">Your Profile</a>
-          {% else %}
-          <a class="btn btn-product" href="{% url 'Login' %}">Login Now </a>
-          {% endif %}
-        </p>
+        <h1>Thanks for contacting us. We will get back to you soon.</h1>
+
     </div>
   </div>
 </div>

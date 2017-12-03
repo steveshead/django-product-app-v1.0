@@ -79,7 +79,7 @@
 			     <a class="nav-link" {% if request.get_full_path == home_url %}href="#sec3"{% else %}style="display:none;"{% endif %}>Section 3</a>
 			</li>
       <li class="nav-item">
-           <a class="nav-link" {% if request.get_full_path == home_url %}href="#footer"{% else %}href="/contact/"{% endif %}>Contact</a>
+           <a class="nav-link" href="{% url 'contact' %}">Contact</a>
       </li>
 		</ul>
 
@@ -105,53 +105,81 @@
     {% endblock %}
   </main>
 
-	<footer id="footer" class="footer">
-			<div class="container">
-					<div class="row">
-							<div class="overlay"></div>
-							<div class="col-md-6 mb-5">
-									<h1>Social Me</h1>
-									<p>Feel free to visit me on Social Media.  I have opinions and I express them - would love to hear yours, philosophically speaking of course.</p>
-									<p>All opinions expressed here and on Social Media are my own and do not represent the views of anyone or anything else.</p>
-									<p>I have to say that - there are some 'not so nice' folks out there you know.</p>
-                  <p>You could always use the contact form over there on the right side, and send me a message.</p>
-									<ul class="social-icons">
-											<li>
-													<a data-placement="bottom" title="LinkedIn" class="fa fa-linkedin" href="http://www.linkedin.com/in/steveshead"></a>
-											</li>
-											<li>
-													<a data-placement="bottom" title="Facebook" class="fa fa-facebook" href="http://www.facebook.com/steveshead"></a>
-											</li>
-											<li>
-													<a data-placement="bottom" title="Twitter" class="fa fa-twitter" href="http://www.twitter.com/steveshead"></a>
-											</li>
-											<li>
-													<a data-placement="bottom" title="Google+" class="fa fa-google-plus" href="https://plus.google.com/u/1/103713768861282204140"></a>
-											</li>
-											<li>
-													<a data-placement="bottom" title="Contact" class="fa fa-envelope go-down" href="mailto:steve@steve-shead.com"></a>
-											</li>
-									</ul>
-							</div>
-              <div class="col-md-1"></div>
-							<div class="col-md-5">
-									<h1>Contact</h1>
+  <footer class="footer-bs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 footer-brand col-sm-6 col-xs-6">
+                <a href="{% url 'home' %}"><img class="img-fluid  wow fadeInDown" src="{% static 'images/logo-white.png' %}"></a>
+                <p class=" wow fadeInDown" data-wow-delay="0.2s">Suspendisse hendrerit tellus laoreet luctus pharetra. Aliquam porttitor vitae orci nec ultricies. Curabitur vehicula, libero eget faucibus faucibus, purus erat eleifend enim, porta pellentesque.</p>
+            </div>
+            <div class="col-md-4 footer-nav col-xs-6 col-sm-6">
+                <h4 class="wow fadeInDown" data-wow-delay="0.4s">Navigation</h4>
+                <div class="row">
+                <div class="col-md-6">
+                    <ul class="pages">
+                        <li class="wow fadeInDown" data-wow-delay="0.5s">
+                            <a href="#">Travel</a>
+                        </li>
+                        <li class="wow fadeInDown" data-wow-delay="0.6s">
+                            <a href="#">Nature</a>
+                        </li>
+                        <li class="wow fadeInDown" data-wow-delay="0.7s">
+                            <a href="#">Science</a>
+                        </li>
+                        <li class="wow fadeInDown" data-wow-delay="0.8s">
+                            <a href="#">Advice</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="list">
+                        <li class="wow fadeInDown" data-wow-delay="0.6s">
+                            <a href="#">About Us</a>
+                        </li>
+                        <li class="wow fadeInDown" data-wow-delay="0.7s">
+                            <a href="#">Contacts</a>
+                        </li>
+                        <li class="wow fadeInDown" data-wow-delay="0.8s">
+                            <a href="#">Terms & Condition</a>
+                        </li>
+                        <li class="wow fadeInDown" data-wow-delay="0.9s">
+                            <a href="#">Privacy Policy</a>
+                        </li>
+                    </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 footer-social col-xs-6 col-sm-6">
+                <h4 class="wow fadeInDown" data-wow-delay="0.6s">Social</h4>
+                <ul>
+                    <li class="wow fadeInDown" data-wow-delay="0.7s">
+                        <a href="http://www.linkedin.com/in/steveshead"><i class="fa fa-linkedin"></i>LinkedIn</a>
+                    </li>
+                    <li class="wow fadeInDown" data-wow-delay="0.8s">
+                        <a href="https://www.twitter.com/steveshead"><i class="fa fa-twitter"></i>Twitter</a>
+                    </li>
+                    <li class="wow fadeInDown" data-wow-delay="0.9s">
+                        <a href="https://www.facebook.com/steveshead"><i class="fa fa-facebook"></i>Facebook</a>
+                    </li>
+                    <li class="wow fadeInDown" data-wow-delay="1s">
+                        <a href="http://www.instagram.com/steveshead"><i class="fa fa-instagram"></i>Instagram</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-3 footer-ns col-sm-6 col-xs-6">
+                <h4 class="wow fadeInDown" data-wow-delay="0.6s">Newsletter</h4>
+                <p class="wow fadeInDown" data-wow-delay="0.7s">Sign up for our monthly newsletter and be the first to receive our latest and greatest news, views and ideas.</p>
+                <div class="wow fadeInDown btn btn-outline-white" data-wow-delay="0.8s">
+                    <a href="{% url 'subscribe' %}">SUBSCRIBE NOW</a>
+                </div>
+            </div>
+            <div class="col-md-12 text-center wow fadeInUp col-sm-12 col-xs-12" data-wow-delay="0.4s">
+                <p>© {% now 'Y' %} Your Company, All rights reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
 
-                  <form method="post" action="contact/" class="contact-form">
-                    {% csrf_token %}
-                    {% include 'includes/form.html' with form=form %}
-                    <input class="btn btn-product" type="submit" value="SEND YOUR MESSAGE" />
-                  </form>
-							</div>
-					</div>
-					<div class="row mt-3">
-							<div class="col">
-									<p class="footnote text-center">
-	Developed by <a href="http://www.steve-shead.com">Steve Shead</a> - All Rights Reserved - © {% now 'Y' %}</p>
-							</div>
-					</div>
-			</div>
-	</footer>
 
 	<!-- Required by Bootstrap v4 beta -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
