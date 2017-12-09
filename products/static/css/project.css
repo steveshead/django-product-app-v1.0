@@ -143,6 +143,10 @@ li.active.page-item.page-link {
   color: #fff !important;
 }
 
+.vh {
+  height: 46vh;
+}
+
 /* custom button */
 .btn {
   border-radius: 2px;
@@ -608,9 +612,8 @@ li.designers {
 }
 
 .footer-bs img {
-  margin-bottom: 20px;
   padding-left: 5px;
-  padding-right: 10px;
+  padding-right: 20px;
 }
 
 .footer-bs p {
@@ -633,6 +636,7 @@ li.designers {
 .footer-bs .footer-brand p {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.70);
+  letter-spacing: 1px;
 }
 
 .footer-bs .footer-nav ul.pages {
@@ -699,7 +703,7 @@ li.designers {
 
 .footer-bs .footer-social a {
   color: rgba(255, 255, 255, 1.00);
-  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .footer-bs .footer-social a:hover {
@@ -716,6 +720,7 @@ li.designers {
 .footer-bs .footer-ns p {
   font-size: 14px;
   color: rgba(255, 255, 255, 0.70);
+  letter-spacing: 1px;
 }
 
 footer .btn {
