@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.core.validators import FileExtensionValidator
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -19,9 +21,9 @@ def get_image_path(instance, filename):
 product_types = (
     ('Choose','Choose'),
     ('T-Shirt','T-Shirt'),
-    ('Sweater','Sweater'),
-    ('Poster', 'Poster'),
-    ('Painting','Painting'),
+    ('PSD Template','PSD Template'),
+    ('HTML Website', 'HTML Website'),
+    ('Python','Python'),
     ('Other','Other')
 )
 
@@ -31,10 +33,11 @@ class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=300)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    url = models.CharField(max_length=200)
-    product_type = models.CharField(max_length=10, choices=product_types, default='choose')
+    url = models.CharField(max_length=200, blank=True)
+    product_type = models.CharField(max_length=15, choices=product_types, default='choose')
     image = models.ImageField(upload_to='product_images', blank=True, null=True)
     image_url = models.CharField(max_length=200, blank=True)
+    product_file = models.FileField(upload_to='product_files', blank=True, null=True, validators=[FileExtensionValidator(['zip'])])
     likes = models.IntegerField(default=0)
 
     def __str__(self):

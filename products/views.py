@@ -16,7 +16,6 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic.edit import UpdateView, DeleteView
 
-# contact and subscribe forms
 from django.core.mail import EmailMessage
 from django.template import Context
 from django.template.loader import get_template
@@ -69,7 +68,7 @@ def products(request):
         products = Product.objects.get_queryset().order_by('id')
     form = ProductForm()
 
-    paginator = Paginator(products, 16)
+    paginator = Paginator(products, 8)
     try:
         products = paginator.page(page)
     except PageNotAnInteger:

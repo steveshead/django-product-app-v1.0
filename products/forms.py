@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'url', 'product_type', 'price', 'image', 'image_url']
+        fields = ['name', 'description', 'url', 'product_type', 'price', 'image', 'image_url', 'product_file']
         labels = {
             'name': 'Product Name',
             'url': 'Product URL',
@@ -19,6 +19,7 @@ class ProductForm(forms.ModelForm):
             'image': 'Product Image',
             'image_url': 'Product Image URL',
             'price': 'Product Price',
+            'product_file': 'Product Zip File',
         }
         widgets = {
             'description': Textarea(attrs={'rows': 5}),
