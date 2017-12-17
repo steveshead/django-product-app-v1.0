@@ -6,6 +6,8 @@ from django.forms import Textarea
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+import os
 
 class ProductForm(forms.ModelForm):
     class Meta:
@@ -24,6 +26,20 @@ class ProductForm(forms.ModelForm):
         widgets = {
             'description': Textarea(attrs={'rows': 5}),
         }
+
+    def clean(self):
+        file = self.cleaned_data.get('product_file')
+
+        if file:
+            if file._size > 4*1024*1024:
+                raise ValidationError("The uploaded file is too large ( > 4mb )")
+            if not file.content_type in ["application/zip"]:
+                raise ValidationError("Content-Type is not Zip")
+            if not os.path.splitext(file.name)[1] in [".zip"]:
+                raise ValidationError("Your uploaded file does not have proper extension")
+            else:
+                pass
+
 
 class EditProfileForm(forms.Form):
     first_name = forms.CharField(label='First Name')

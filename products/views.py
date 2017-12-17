@@ -110,22 +110,28 @@ def post_product(request):
             product.likes = 0
             product.save()
         # redirect to a new URL:
-        return HttpResponseRedirect('/products')
+            return HttpResponseRedirect('/products')
+        else:
+            context = {"form": form}
+            return render(request, "products.html", context)
+
 
 def detail(request, product_id):
     product = Product.objects.get(id=product_id)
     #hashtags = HashTag.objects.filter(product=product_id)
     return render(request, 'detail.html', {'product': product})
 
+@login_required
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     products = Product.objects.filter(user=user)
     if not request.user == user:
-        return render(request, 'no.html')
+        return redirect('profile', username=request.user.username)
     else:
         return render(request, 'profile.html', {'user':user,'products': products})
 
 
+@login_required
 def edit_profile(request):
     user = request.user
     products = Product.objects.filter(user=user)

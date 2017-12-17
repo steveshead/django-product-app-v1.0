@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core.validators import FileExtensionValidator
+from django.core import validators
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
+import os
 
 
 class UserProfile(models.Model):
@@ -45,3 +49,17 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('index', kwargs={})
+
+
+def _delete_file(path):
+    # Deletes file from filesystem.
+    if os.path.isfile(path):
+        os.remove(path)
+
+
+@receiver(pre_delete, sender=Product)
+def delete_assets(sender, instance, *args, **kwargs):
+    if instance.image:
+        _delete_file(instance.image.path)
+    if instance.product_file:
+        _delete_file(instance.product_file.path)
